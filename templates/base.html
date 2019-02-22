@@ -1,0 +1,93 @@
+{% load bootstrap4 %}
+
+{% load rules %}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}KLBlog{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}?v=<?=time();?>">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous">
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+
+</head>
+<body>
+    <div class="wrap">
+    <div class="main">
+        <header role="banner">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="{% url 'blogs:index' %}">KLBlog</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar"
+                            aria-controls="mainNavbar" aria-expanded="false">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div id="mainNavbar" class="collapse navbar-collapse">
+                        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                            {% has_perm 'blogs.add_post' user as can_create_post %}
+                            {% if can_create_post %}
+                            <li class="nav-item">
+                                <a href="{% url 'blogs:new_post' %}" class="nav-link">Create a post</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                        <ul class="navbar-nav mt-2 mt-lg-0">
+                            {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <span class="navbar-text">Hello,
+                                    <a href="{% url 'blogs:blogger' user.username %}">{{ user.username }}</a>
+                                </span>
+                            </li>
+                            <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Sign out</a></li>
+                            {% else %}
+                            <li class="nav-item">
+                                <a href="{% url 'django_registration_register' %}" class="nav-link">Sign up</a>
+                            </li>
+                            <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Sign in</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        {% block header %}{% endblock %}
+
+        <div class="container mb-5">
+            <div>
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <footer class="bg-dark">
+        <div class="container">
+            <div class="row text-muted">
+                <div class="col-7 mt-2 mb-2">
+                    <small>
+                        KLBlog authored by ©
+                        <a href="https://github.com/kaleid-liner" class="text-light">kaleid-liner</a><br>
+                        Powered by django<br>
+                        You can visit this project
+                        <a href="https://github.com/kaleid-liner/KLBlog" class="text-light">here</a>.
+                    </small>
+                </div>
+                <div class="col-4 mt-2 mb-2">
+                    <a href="http://www.djangoproject.com/" class="mt-2">
+                        <img src="https://www.djangoproject.com/m/img/badges/djangosite100x25_grey.gif"
+                             border="0" alt="A Django site." title="A Django site.">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

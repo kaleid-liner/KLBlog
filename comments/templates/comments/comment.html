@@ -1,0 +1,42 @@
+{% load bootstrap4 %}
+
+<div class="card comment-card">
+    <div class="card-header">
+        <div class="d-flex flex-row justify-content-between">
+            <div>
+                <a href="{% url 'blogs:blogger' comment.author.username %}">
+                    {{ comment.author.username }}
+                </a>
+                <span class="text-muted">comments</span>
+            </div>
+            <div>
+                <small class="text-muted"><i class="fa fa-calendar-alt"></i> {{ comment.pub_date }}</small>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="d-flex flex-row justify-content-between">
+            <div>
+                <p class="card-text">{{ comment.text }}</p>
+                <a class="card-link" data-toggle="collapse" href="#childComments{{ index }}">
+                View comments <i class="fas fa-angle-double-down"></i>
+            </a>
+            </div>
+            <div>
+                <button type="button" class="btn btn-secondary" data-toggle="modal"
+                        data-target="#commentModal" data-comment_id="{{ comment.id }}">
+                    <i class="fa fa-comment-alt"></i>
+                </button>
+            </div>
+        </div>
+        <div class="collapse mt-2" id="childComments{{ index }}">
+            {% if children %}
+            <div class="list-group">
+                {% include 'comments/comment_list.html' with parent=comment children=comment.comment_set.all only%}
+            </div>
+            {% else %}
+            <p class="lead">No reply.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>

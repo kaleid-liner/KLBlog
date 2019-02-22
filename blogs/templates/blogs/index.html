@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+
+{% load render_paginator %}
+
+{% block title %}KLBlog{% endblock %}
+
+{% block header %}
+<div class="container">
+    <div class="pb-2 mt-4 mb-2 border-bottom">
+        <h1>Posts</h1>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="container d-flex flex-column mt-3">
+    <div class="col-xs-12 col-md-8 col-lg-7">
+    {% for post in post_list %}
+        <div class="card mb-5">
+            <img class="card-img-top" src="{{ post.pic.url }}">
+            <div class="card-body">
+                <h3 class="card-title text-uppercase">
+                    <a href="{% url 'blogs:post' post.id %}" class="card-link">{{ post.title }}</a>
+                </h3>
+                <div class="mb-1">
+                    <small class="text-muted">
+                        <i class="fa fa-calendar-alt"></i>
+                        {{ post.pub_date|date:"N d, Y" }}&nbsp; &nbsp;
+                        <i class="fa fa-user"></i>
+                        <a class="card-link" href="{% url 'blogs:blogger' post.author.username %}">
+                            {{ post.author.username }}
+                        </a>
+                    </small>
+                </div>
+                <p class="card-text">
+                    {{ post.description }}
+                </p>
+            </div>
+        </div>
+    {% empty %}
+        <p class="lead">No post available now.</p>
+    {% endfor %}
+
+        <p class="lead">That's all.</p>
+
+        {% render_paginator 3 %}
+    </div>
+
+</div>
+
+{% endblock %}

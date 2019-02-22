@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+
+{% block header %}
+<div class="container">
+    <div class="pb-2 mt-4 mb-2 border-bottom">
+        <h1>Delete this post</h1>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <div class="alert alert-danger" role="alert">
+        Are you sure you want to delete Post <cite title="{{ post.title }}">{{ post }}?</cite>
+    </div>
+    <button type="submit" class="btn btn-danger">Yes, I'm sure.</button>
+    <button type="reset" class="btn btn-info" onclick="window.history.back()">Take me back.</button>
+</form>
+{% endblock %}

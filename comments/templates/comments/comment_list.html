@@ -1,0 +1,22 @@
+{% load bootstrap4 %}
+
+{% for comment in children %}
+<div class="list-group-item list-group-item-action" data-toggle="modal"
+     data-target="#commentModal" data-comment_id="{{ comment.id }}">
+    <div class="mb-1 d-flex justify-content-between">
+        <p class="text-muted">
+            <a class="" href="{% url 'blogs:blogger' comment.author.username %}">
+                {{ comment.author.username }}
+            </a>
+            replying to
+            <a class="" href="{% url 'blogs:blogger' parent.author.username %}">
+                {{ parent.author.username }}
+            </a>
+        </p>
+        <small class="text-muted"><i class="fa fa-calendar-alt"></i> {{ comment.pub_date }}</small>
+    </div>
+    <p>{{ comment.text }}</p>
+</div>
+{% include 'comments/comment_list.html' with parent=comment children=comment.comment_set.all %}
+{% endfor %}
+
