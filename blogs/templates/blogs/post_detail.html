@@ -32,7 +32,7 @@
 {% block content %}
 <article class="mb-5">
     <p>
-        {{ post.text|linebreaks }}
+        {{ post.formatted_markdown|safe }}
     </p>
 </article>
 

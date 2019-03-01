@@ -8,6 +8,7 @@ from rules.contrib.views import PermissionRequiredMixin
 from .models import BlogPost
 from . import blogs_rules
 from comments.forms import CommentForm
+from .forms import BlogPostForm
 
 import datetime
 
@@ -40,8 +41,7 @@ class PostDetailView(generic.DetailView):
 
 
 class CreatePostView(PermissionRequiredMixin, generic.edit.CreateView):
-    model = BlogPost
-    fields = ['title', 'description', 'text', 'pic']
+    form_class = BlogPostForm
     template_name = 'blogs/new_post.html'
     permission_required = 'blogs.add_post'
     permission_denied_message = 'You need to login to publish your post.'

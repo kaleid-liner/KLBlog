@@ -28,6 +28,7 @@ urlpatterns = [
     path('accounts/', include('django_registration.backends.one_step.urls')),
     path('', include('blogs.urls')),
     path('', include('comments.urls')),
+    path('markdownx/', include('markdownx.urls')),
 ]
 
 if settings.DEBUG == True:

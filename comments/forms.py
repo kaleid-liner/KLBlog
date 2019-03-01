@@ -1,5 +1,6 @@
 from django import forms
 from .models import Comment
+from .widgets import CommentMarkdownxWidget
 
 
 class CommentForm(forms.ModelForm):
@@ -13,4 +14,7 @@ class CommentForm(forms.ModelForm):
         }
         help_texts = {
             'text': 'Enter your comment',
+        }
+        widgets = {
+            'text': CommentMarkdownxWidget()
         }

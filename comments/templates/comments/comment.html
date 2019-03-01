@@ -17,7 +17,7 @@
     <div class="card-body">
         <div class="d-flex flex-row justify-content-between">
             <div>
-                <p class="card-text">{{ comment.text }}</p>
+                <span class="card-text">{{ comment.formatted_markdown|safe }}</span>
                 <a class="card-link" data-toggle="collapse" href="#childComments{{ index }}">
                 View comments <i class="fas fa-angle-double-down"></i>
             </a>
