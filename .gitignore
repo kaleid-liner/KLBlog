@@ -135,4 +135,6 @@ tags
 
 # development upload files
 media/*
-!media/.gitkeep
+
+# local_settings
+KLBlog/local_settings.py
