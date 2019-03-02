@@ -8,7 +8,7 @@ from markdownx.utils import markdownify
 
 # Create your models here.
 class Comment(models.Model):
-    text = MarkdownxField()
+    text = MarkdownxField(null=True, blank=True)
     pub_date = models.DateTimeField('Date Published')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(BlogPost, on_delete=models.CASCADE)

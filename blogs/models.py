@@ -12,9 +12,9 @@ def get_user_path(instance, filename):
 # Create your models here.
 class BlogPost(models.Model):
     title = models.CharField(max_length=40)
-    description = models.CharField(max_length=1024, default='')
+    description = models.CharField(max_length=1024, default='', null=True, blank=True)
     pub_date = models.DateTimeField('Date Published')
-    text = MarkdownxField()
+    text = MarkdownxField(null=True, blank=True)
     pic = models.ImageField(upload_to=get_user_path, default=None)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
