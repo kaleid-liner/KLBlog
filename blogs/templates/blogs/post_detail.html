@@ -30,10 +30,8 @@
 {% endblock %}
 
 {% block content %}
-<article class="mb-5">
-    <p>
-        {{ post.formatted_markdown|safe }}
-    </p>
+<article class="mb-5 markdown-body">
+    {{ post.formatted_markdown|safe }}
 </article>
 
 {% has_perm 'comments.add_comment' user as can_add_comment %}
