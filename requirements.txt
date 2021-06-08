@@ -5,7 +5,7 @@ django-markdownx==2.0.28
 django-registration==3.0
 Markdown==3.0.1
 mysqlclient==1.4.1
-Pillow==5.4.1
+Pillow==8.2.0
 Pygments==2.3.1
 pytz==2018.9
 rules==2.0.1
